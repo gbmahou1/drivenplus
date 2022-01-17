@@ -56,6 +56,8 @@ a, a:hover, a:visited, a:active
 }`
 
 
+
+
 export default function LandingPage()
 {
 
@@ -80,11 +82,17 @@ export default function LandingPage()
 
 
         function tratarSucesso(resposta) { 
-            setUser (resposta.data);
 
-            if (user.membership == null)
+            setUser (resposta.data);
+            console.log(user);
+
+            if (resposta.data.membership == null)
             {
                 navigate("/subscriptions");
+            }
+            else
+            {
+                navigate("/home");
             }
          }
 

@@ -2,6 +2,9 @@ import React from "react";
 import styled from 'styled-components';
 import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useState } from "react";
+import { useEffect } from "react";
 
 
 
@@ -91,6 +94,7 @@ export default function SubscriptionsId()
     const params = useParams();
     console.log(params);
     let navigate = useNavigate();
+
 
     if (params.idPlano == 1)
     return(

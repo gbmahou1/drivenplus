@@ -40,11 +40,34 @@ font-size: 50px;
 color: white;
 text-align: center;`
 
-const Plano = styled.img`
+const Plano = styled.div`
 margin-left: 75px;
-max-width: 100%;
+height: 250px;
+width: 420px;
+border-style: solid;
+border-color: grey;
+border-radius: 10px;
+border-size: 5px;
+margin-bottom: 10px;
+display: flex;
+flex: wrap;`
+
+const PlanoImg = styled.img`
+margin-top: 5px;
+height: 240px;
+width: 240px;
 max-height: 100%;
-width: 420px;`
+max-width: 100%;`
+
+const PlanoPreco = styled.div`
+font-family: 'Roboto', sans-serif;
+font-weight: bolder;
+font-size: 25px;
+color: white;
+line-height: 50px;
+margin-top: 100px;
+margin-left: 30px;
+`
 
 
 export default function Subscriptions()
@@ -54,7 +77,7 @@ export default function Subscriptions()
     const [items, setItems] = useState([]);
 
 
-    useEffect(() => {
+   useEffect(() => {
 		const requisicao = axios.get("https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships", {
             headers: {
                 "Authorization": `Bearer ${user.token}`
@@ -63,23 +86,30 @@ export default function Subscriptions()
 
 		requisicao.then(resposta => {
 			setItems(resposta.data);
-            console.log(items);
+            console.log(resposta.data);
 		});
 	}, []);
 
+    function Mapeia(lista)
+    {
+        return(
+        <Plano onClick={() => navigate(`/subscriptions/${lista.id}`)} >
+            <PlanoImg src={`${lista.image}`}></PlanoImg>
+            <PlanoPreco>${lista.price}</PlanoPreco>
+        </Plano>);
+    }
+
     return(
-        <Background>
-            <Body>
-                <Title>Escolha seu plano</Title>
+    <>{items.length === 0 ? (<div>Loading</div>) 
+  : (
+    <Background>
+        <Body>
+    <Title>Escolha seu plano</Title>
+            {items.map (item => { Mapeia(item)})}
 
-                <Plano onClick={() => navigate("/subscriptions/1")} src="imgs/plano1.png"></Plano>
-                <Plano onClick={() => navigate("/subscriptions/2")} src="imgs/plano2.png"></Plano>
-                <Plano onClick={() => navigate("/subscriptions/3")} src="imgs/plano3.png"></Plano>
+        </Body>
+    </Background>
+  )
 
-
-               
-
-            </Body>
-        </Background>
-    );
+    }</>);
 }
