@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { AuthContext } from "../Providers/auth";
 import { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 
 const Background = styled.div`
@@ -64,8 +65,7 @@ export default function LandingPage()
 
     const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
-
-	console.log(user);
+    let navigate = useNavigate();
 
     function fazerLogin(event)
     {  
@@ -80,8 +80,12 @@ export default function LandingPage()
 
 
         function tratarSucesso(resposta) { 
-            setUser = resposta.data;
-            console.log(user);
+            setUser (resposta.data);
+
+            if (user.membership == null)
+            {
+                navigate("/subscriptions");
+            }
          }
 
          function tratarErro(){

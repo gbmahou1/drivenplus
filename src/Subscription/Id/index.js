@@ -1,6 +1,8 @@
 import React from "react";
 import styled from 'styled-components';
 import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 
 const Background = styled.div`
@@ -87,12 +89,15 @@ export default function SubscriptionsId()
 {
 
     const params = useParams();
+    console.log(params);
+    let navigate = useNavigate();
 
+    if (params.idPlano == 1)
     return(
         <Background>
             <Body>
                 
-                <Arrow src="/imgs/leftarrow.png"></Arrow>
+                <Arrow onClick={() => navigate("/subscriptions")} src="/imgs/leftarrow.png"></Arrow>
 
                 <Logo>
                     <D src="/imgs/whiteD.png"></D>
@@ -123,13 +128,90 @@ export default function SubscriptionsId()
                     <Input type="submit" inputColor="#FF4791" inputTextColor="white" inputStyle="bold" value="ASSINAR"></Input>
                 </Inputs>
 
+            </Body>
+        </Background>
+        
+    );
+    else if (params.idPlano == 2)
+    return(
 
+        <Background>
+            <Body>
+                
+                <Arrow onClick={() => navigate("/subscriptions")} src="/imgs/leftarrow.png"></Arrow>
 
+                <Logo>
+                    <D src="/imgs/yellowD.png"></D>
+                    <Driven src="/imgs/drivenplus.png"></Driven>
+                </Logo>
 
+                <Beneficios src="/imgs/beneficios.png"></Beneficios>
 
-               
+                <Texto>
+                    1. Brindes Exclusivos <br/>
+                    2. Materiais bônus de web
+                </Texto>
+
+                <Preco src="/imgs/preco.png"></Preco>
+
+                <Texto>
+                    R$ 39,99 cobrados mensalmente
+                </Texto>
+
+                <Inputs>
+
+                    <Input type="text" placeholder="        Nome impresso no cartão"></Input>
+                    <Input type="text" placeholder="        Digitos no cartão"></Input>
+                    <Flex>
+                        <Input type="text" placeholder="    Código de segurança" inputWidth="245px;"></Input>
+                        <Input type="text" placeholder="    Validade" inputWidth="245px;" inputMarginLeft="10px;"></Input>
+                    </Flex>
+                    <Input type="submit" inputColor="#FF4791" inputTextColor="white" inputStyle="bold" value="ASSINAR"></Input>
+                </Inputs>
 
             </Body>
         </Background>
+
+    );
+    else if (params.idPlano == 3)
+    return(
+
+        <Background>
+            <Body>
+                
+                <Arrow onClick={() => navigate("/subscriptions")} src="/imgs/leftarrow.png"></Arrow>
+
+                <Logo>
+                    <D src="/imgs/greenD.png"></D>
+                    <Driven src="/imgs/drivenplus.png"></Driven>
+                </Logo>
+
+                <Beneficios src="/imgs/beneficios.png"></Beneficios>
+
+                <Texto>
+                    1. Brindes Exclusivos <br/>
+                    2. Materiais bônus de web
+                </Texto>
+
+                <Preco src="/imgs/preco.png"></Preco>
+
+                <Texto>
+                    R$ 39,99 cobrados mensalmente
+                </Texto>
+
+                <Inputs>
+
+                    <Input type="text" placeholder="        Nome impresso no cartão"></Input>
+                    <Input type="text" placeholder="        Digitos no cartão"></Input>
+                    <Flex>
+                        <Input type="text" placeholder="    Código de segurança" inputWidth="245px;"></Input>
+                        <Input type="text" placeholder="    Validade" inputWidth="245px;" inputMarginLeft="10px;"></Input>
+                    </Flex>
+                    <Input type="submit" inputColor="#FF4791" inputTextColor="white" inputStyle="bold" value="ASSINAR"></Input>
+                </Inputs>
+
+            </Body>
+        </Background>
+
     );
 }

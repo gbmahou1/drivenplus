@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { AuthContext } from "../Providers/auth";
 import { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 
 const Background = styled.div`
@@ -65,10 +67,12 @@ export default function RegisterPage()
 	const [cpf, setCpf] = useState("");
     const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
+    let navigate = useNavigate();
 
     function signUp(event)
     {  
         event.preventDefault();
+        
 
         const promessa = axios.post('https://mock-api.driven.com.br/api/v4/driven-plus/auth/sign-up', {
             email: email,
@@ -83,7 +87,9 @@ export default function RegisterPage()
 
 
         function tratarSucesso(resposta) { 
-            alert("login feito :)");
+
+            navigate("/");
+            
          }
 
          function tratarErro(){

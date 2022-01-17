@@ -1,6 +1,11 @@
 import React from "react";
 import styled from 'styled-components';
 import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
+import { AuthContext } from "../Providers/auth";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useState } from "react";
+import { useEffect } from "react";
 
 
 const Background = styled.div`
@@ -44,14 +49,32 @@ width: 420px;`
 
 export default function Subscriptions()
 {
+    const { user, setUser } = React.useContext(AuthContext);
+    let navigate = useNavigate();
+    const [items, setItems] = useState([]);
+
+
+    useEffect(() => {
+		const requisicao = axios.get("https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships", {
+            headers: {
+                "Authorization": `Bearer ${user.token}`
+              }
+        });
+
+		requisicao.then(resposta => {
+			setItems(resposta.data);
+            console.log(items);
+		});
+	}, []);
+
     return(
         <Background>
             <Body>
                 <Title>Escolha seu plano</Title>
 
-                <Plano src="imgs/plano1.png"></Plano>
-                <Plano src="imgs/plano2.png"></Plano>
-                <Plano src="imgs/plano3.png"></Plano>
+                <Plano onClick={() => navigate("/subscriptions/1")} src="imgs/plano1.png"></Plano>
+                <Plano onClick={() => navigate("/subscriptions/2")} src="imgs/plano2.png"></Plano>
+                <Plano onClick={() => navigate("/subscriptions/3")} src="imgs/plano3.png"></Plano>
 
 
                
